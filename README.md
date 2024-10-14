@@ -1,2 +1,1 @@
-# IsraelDelCargoNew
-Logistics repository: tools, optimization, tracking, inventory, analytics, collaboration, innovation.
+# IsraelDelCargoNew tools, optimization, tracking, inventory, analytics, collaboration, innovation.
