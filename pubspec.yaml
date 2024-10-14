@@ -1,7 +1,7 @@
-name: israeldelcargo
+name: israel_del_cargo
 description: A Flutter application for IsraelDelCargo.
-publish_to: 'none' # Укажите URL, если вы планируете публиковать пакет
 
+# Версия приложения
 version: 1.0.0+1
 
 environment:
@@ -11,27 +11,35 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Добавленные зависимости
-  font_awesome_flutter: ^10.4.0
+  # Добавляем необходимые пакеты
+  font_awesome_flutter: ^10.1.0
   url_launcher: ^6.1.7
+  flutter_map: ^3.1.0
+  latlong2: ^0.8.1
 
-  # Стандартные зависимости
-  cupertino_icons: ^1.0.2
+  # Дополнительные пакеты, если нужны
+  # Например, intl для локализации
+  # intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Flutter Dev Tools
   flutter_lints: ^2.0.0
 
 flutter:
+
+  # Используем материалы по умолчанию
   uses-material-design: true
 
+  # Указываем ассеты
   assets:
-    - assets/images/playns.png
-    - assets/images/about.jpg
-    - assets/images/logistic.jpg
+    - assets/images/logos.jpg
     - assets/images/logistic2.jpg
-    - assets/images/logos.jpg # Добавьте логотип
+    - assets/images/logistic.jpg
+    - assets/images/about.jpg
+    - assets/images/playns.png
     - assets/images/tovari.jpg
     - assets/images/settings.jpg
+    # Добавьте другие изображения по мере необходимости

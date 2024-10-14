@@ -64,7 +64,7 @@ class AppLocalizations {
       'prices_title': 'Цены',
       'price_delivery_documents': 'Доставка документов',
       'price_religious_items': 'Религиозные атрибуты (книги, иудайка)',
-      'price_clothing': 'Одежда, обувь, головные уборы (от 1кг-1ед)',
+      'price_clothing': 'Одежда, обувь, головные уборы (1кг-1ед)',
       'price_kosher_food': 'Кошерное питание',
       'price_duty_free': 'Товары из Duty Free',
       'price_small_packages': 'Маленькие посылки (до 1кг)',
@@ -80,6 +80,15 @@ class AppLocalizations {
       'delete_confirmation_content': 'Вы уверены, что хотите удалить этот товар из корзины?',
       'yes': 'Да',
       'no': 'Нет',
+      'calculate_delivery': 'Рассчитать доставку',
+      'origin_city': 'Город отправления',
+      'destination_city': 'Город назначения',
+      'select_origin_city': 'Выберите город отправления',
+      'select_destination_city': 'Выберите город назначения',
+      'calculate': 'Рассчитать',
+      'delivery_cost': 'Стоимость доставки: ',
+      'moscow': 'Москва',
+      'tel_aviv': 'Тель-Авив',
     },
     'en': {
       'menu': 'Menu',
@@ -130,7 +139,7 @@ class AppLocalizations {
       'prices_title': 'Prices',
       'price_delivery_documents': 'Document delivery',
       'price_religious_items': 'Religious items (books, judaica)',
-      'price_clothing': 'Clothing, footwear, headwear (from 1kg-1pcs)',
+      'price_clothing': 'Clothing, footwear, headwear (1kg-1pcs)',
       'price_kosher_food': 'Kosher food',
       'price_duty_free': 'Duty Free goods',
       'price_small_packages': 'Small packages (up to 1kg)',
@@ -146,6 +155,15 @@ class AppLocalizations {
       'delete_confirmation_content': 'Are you sure you want to remove this item from the cart?',
       'yes': 'Yes',
       'no': 'No',
+      'calculate_delivery': 'Calculate Delivery',
+      'origin_city': 'Origin City',
+      'destination_city': 'Destination City',
+      'select_origin_city': 'Select Origin City',
+      'select_destination_city': 'Select Destination City',
+      'calculate': 'Calculate',
+      'delivery_cost': 'Delivery Cost: ',
+      'moscow': 'Moscow',
+      'tel_aviv': 'Tel Aviv',
     },
     'he': {
       'menu': 'תפריט',
@@ -196,7 +214,7 @@ class AppLocalizations {
       'prices_title': 'מחירים',
       'price_delivery_documents': 'משלוח מסמכים',
       'price_religious_items': 'פריטים דתיים (ספרים, יודאיקה)',
-      'price_clothing': 'ביגוד, נעליים, כובעים (מ-1 ק"ג-1 יחידה)',
+      'price_clothing': 'ביגוד, נעליים, כובעים (1ק"ג-1יחידה)',
       'price_kosher_food': 'מזון כשר',
       'price_duty_free': 'מוצרים מדוי די פרי',
       'price_small_packages': 'חבילות קטנות (עד 1 ק"ג)',
@@ -212,6 +230,15 @@ class AppLocalizations {
       'delete_confirmation_content': 'האם אתה בטוח שברצונך להסיר את המוצר הזה מהעגלה?',
       'yes': 'כן',
       'no': 'לא',
+      'calculate_delivery': 'חשב את המשלוח',
+      'origin_city': 'עיר המוצא',
+      'destination_city': 'עיר היעד',
+      'select_origin_city': 'בחר עיר מוצא',
+      'select_destination_city': 'בחר עיר יעד',
+      'calculate': 'חשב',
+      'delivery_cost': 'עלות משלוח: ',
+      'moscow': 'מוסקבה',
+      'tel_aviv': 'תל אביב',
     },
   };
 
@@ -299,6 +326,10 @@ class _HomePageState extends State<HomePage> {
           onLocaleChange: widget.onLocaleChange,
         );
         break;
+      case DrawerSections.calculateDelivery:
+        container =
+            CalculateDeliveryPage(localizations: widget.localizations);
+        break;
       default:
         container = ProductsPage(
           onAddToCart: addToCart,
@@ -309,7 +340,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.localizations.get(currentPage == DrawerSections.products ? 'products' : 'menu'),
+          widget.localizations.get(currentPage == DrawerSections.products
+              ? 'products'
+              : (currentPage == DrawerSections.calculateDelivery
+                  ? 'calculate_delivery'
+                  : 'menu')),
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -328,8 +363,9 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          CartPage(cartItems: cartItems, localizations: widget.localizations),
+                      builder: (context) => CartPage(
+                          cartItems: cartItems,
+                          localizations: widget.localizations),
                     ),
                   );
                 },
@@ -367,7 +403,7 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: Container(
           decoration: BoxDecoration(
-            // Можно добавить фоновый градиент или цвет
+            // Фоновый градиент
             gradient: LinearGradient(
               colors: [Colors.blueAccent, Colors.purpleAccent],
               begin: Alignment.topLeft,
@@ -376,28 +412,33 @@ class _HomePageState extends State<HomePage> {
           ),
           child: SafeArea(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Распределяем элементы по вертикали
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween, // Распределяем элементы по вертикали
               children: <Widget>[
                 // Верхняя часть Drawer с логотипом и "Меню"
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 16.0, top: 20.0),
+                      padding:
+                          const EdgeInsets.only(left: 16.0, top: 20.0),
                       child: CircleAvatar(
                         radius: 40,
-                        backgroundImage: AssetImage('assets/images/logos.jpg'),
+                        backgroundImage:
+                            AssetImage('assets/images/logos.jpg'),
                         backgroundColor: Colors.transparent,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 20.0),
+                      padding: const EdgeInsets.only(
+                          left: 16.0, top: 8.0, bottom: 20.0),
                       child: Text(
                         widget.localizations.get('menu'),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
-                          fontWeight: FontWeight.bold, // Увеличиваем жирность шрифта
+                          fontWeight:
+                              FontWeight.bold, // Увеличиваем жирность шрифта
                         ),
                       ),
                     ),
@@ -408,29 +449,101 @@ class _HomePageState extends State<HomePage> {
                   child: ListView(
                     padding: EdgeInsets.zero,
                     children: <Widget>[
+                      menuItem(1, widget.localizations.get("howWeWork"),
+                          Icons.work, DrawerSections.howWeWork),
                       menuItem(
-                          1, widget.localizations.get("howWeWork"), Icons.work, DrawerSections.howWeWork),
-                      menuItem(2, widget.localizations.get("advantages"), Icons.check_circle,
+                          2,
+                          widget.localizations.get("advantages"),
+                          Icons.check_circle,
                           DrawerSections.advantages),
-                      menuItem(3, widget.localizations.get("prices"), Icons.attach_money, DrawerSections.prices),
-                      menuItem(4, widget.localizations.get("products"), Icons.shopping_cart,
+                      menuItem(
+                          3,
+                          widget.localizations.get("prices"),
+                          Icons.attach_money,
+                          DrawerSections.prices),
+                      menuItem(
+                          4,
+                          widget.localizations.get("products"),
+                          Icons.shopping_cart,
                           DrawerSections.products),
-                      menuItem(5, widget.localizations.get("aboutUs"), Icons.info, DrawerSections.aboutUs),
-                      menuItem(6, widget.localizations.get("settings"), Icons.settings, DrawerSections.settings),
+                      menuItem(5, widget.localizations.get("aboutUs"),
+                          Icons.info, DrawerSections.aboutUs),
+                      menuItem(6, widget.localizations.get("settings"),
+                          Icons.settings, DrawerSections.settings),
+                      menuItem(
+                          7,
+                          widget.localizations.get("calculate_delivery"),
+                          Icons.calculate,
+                          DrawerSections.calculateDelivery),
                     ],
                   ),
                 ),
-                // Нижняя часть Drawer с подписью
+                // Нижняя часть Drawer с иконками и подписью
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    'Created by Yosef Mamedov!',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold, // Увеличиваем жирность шрифта
-                    ),
-                    textAlign: TextAlign.center,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min, // Уменьшаем размер колонки
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Иконка WhatsApp
+                          IconButton(
+                            icon: FaIcon(
+                              FontAwesomeIcons.whatsapp,
+                              color: Colors.white, // Изменили цвет на белый
+                            ),
+                            onPressed: () async {
+                              final Uri whatsappUri =
+                                  Uri.parse("https://wa.me/79914992420");
+                              if (await canLaunchUrl(whatsappUri)) {
+                                await launchUrl(whatsappUri,
+                                    mode: LaunchMode.externalApplication);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(widget.localizations
+                                          .get('not_supported'))),
+                                );
+                              }
+                            },
+                          ),
+                          SizedBox(width: 20),
+                          // Иконка Telegram
+                          IconButton(
+                            icon: FaIcon(
+                              FontAwesomeIcons.telegram,
+                              color: Colors.white, // Изменили цвет на белый
+                            ),
+                            onPressed: () async {
+                              final Uri telegramUri =
+                                  Uri.parse("https://t.me/israeldelcargo");
+                              if (await canLaunchUrl(telegramUri)) {
+                                await launchUrl(telegramUri,
+                                    mode: LaunchMode.externalApplication);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(widget.localizations
+                                          .get('not_supported'))),
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Created by Yosef Mamedov', // Удалили восклицательный знак
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 16,
+                          fontWeight:
+                              FontWeight.bold, // Увеличиваем жирность шрифта
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -455,7 +568,9 @@ class _HomePageState extends State<HomePage> {
   /// Виджет элемента меню с иконкой слева и жирным текстом.
   Widget menuItem(int id, String title, IconData icon, DrawerSections section) {
     return Material(
-      color: currentPage == section ? Colors.white.withOpacity(0.2) : Colors.transparent,
+      color: currentPage == section
+          ? Colors.white.withOpacity(0.2)
+          : Colors.transparent,
       child: InkWell(
         onTap: () {
           setState(() {
@@ -464,7 +579,8 @@ class _HomePageState extends State<HomePage> {
           });
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+          padding:
+              const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
           child: Row(
             children: <Widget>[
               Icon(
@@ -478,7 +594,8 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
-                  fontWeight: FontWeight.bold, // Увеличиваем жирность шрифта
+                  fontWeight:
+                      FontWeight.bold, // Увеличиваем жирность шрифта
                 ),
               ),
             ],
@@ -491,12 +608,18 @@ class _HomePageState extends State<HomePage> {
   /// Функция добавления товара в корзину с анимацией.
   void addToCart(CargoCategory category, GlobalKey key) async {
     // Получаем позицию и размер иконки товара
-    final RenderBox renderBox = key.currentContext?.findRenderObject() as RenderBox;
+    final RenderBox? renderBox =
+        key.currentContext?.findRenderObject() as RenderBox?;
+    if (renderBox == null) return;
+
     final position = renderBox.localToGlobal(Offset.zero);
     final size = renderBox.size;
 
     // Получаем позицию и размер иконки корзины
-    final RenderBox cartRenderBox = cartIconKey.currentContext?.findRenderObject() as RenderBox;
+    final RenderBox? cartRenderBox =
+        cartIconKey.currentContext?.findRenderObject() as RenderBox?;
+    if (cartRenderBox == null) return;
+
     final cartPosition = cartRenderBox.localToGlobal(Offset.zero);
     final cartSize = cartRenderBox.size;
 
@@ -509,7 +632,7 @@ class _HomePageState extends State<HomePage> {
         endSize: cartSize,
         child: Icon(
           category.icon,
-          color: Colors.black,
+          color: Colors.white, // Изменили цвет на белый для лучшей видимости
           size: 40,
         ),
       ),
@@ -533,6 +656,7 @@ enum DrawerSections {
   products,
   aboutUs,
   settings,
+  calculateDelivery, // Новая секция
 }
 
 /// Страница корзины.
@@ -550,7 +674,8 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   /// Функция для открытия ссылки оплаты.
   void _launchPaymentURL() async {
-    final Uri url = Uri.parse('https://www.tbank.ru/rm/rabaev.natan1/qBQMJ15331/');
+    final Uri url =
+        Uri.parse('https://www.tbank.ru/rm/rabaev.natan1/qBQMJ15331/');
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(widget.localizations.get('not_supported'))),
@@ -565,7 +690,8 @@ class _CartPageState extends State<CartPage> {
       builder: (context) {
         return AlertDialog(
           title: Text(widget.localizations.get('delete_confirmation_title')),
-          content: Text(widget.localizations.get('delete_confirmation_content')),
+          content:
+              Text(widget.localizations.get('delete_confirmation_content')),
           actions: [
             TextButton(
               onPressed: () {
@@ -595,8 +721,19 @@ class _CartPageState extends State<CartPage> {
       widget.cartItems.removeAt(index);
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${widget.localizations.get('select')}${widget.localizations.get(removedItem.name)}')),
+      SnackBar(
+          content: Text(
+              '${widget.localizations.get('select')}${widget.localizations.get(removedItem.name)}')),
     );
+  }
+
+  /// Рассчитать общую стоимость корзины
+  int get totalCost {
+    int sum = 0;
+    for (var item in widget.cartItems) {
+      sum += item.deliveryCost;
+    }
+    return sum;
   }
 
   @override
@@ -633,11 +770,13 @@ class _CartPageState extends State<CartPage> {
                   child: ElevatedButton(
                     onPressed: _launchPaymentURL,
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 16.0, horizontal: 32.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
-                      backgroundColor: Colors.transparent, // Убираем основной цвет
+                      backgroundColor:
+                          Colors.transparent, // Заменили primary на backgroundColor
                       shadowColor: Colors.transparent, // Убираем тень
                     ).copyWith(
                       elevation: ButtonStyleButton.allOrNull(0.0),
@@ -655,7 +794,8 @@ class _CartPageState extends State<CartPage> {
                         borderRadius: BorderRadius.circular(30.0),
                       ),
                       child: Container(
-                        constraints: BoxConstraints(minWidth: 150, minHeight: 50),
+                        constraints:
+                            BoxConstraints(minWidth: 150, minHeight: 50),
                         alignment: Alignment.center,
                         child: Text(
                           widget.localizations.get('pay'),
@@ -666,6 +806,18 @@ class _CartPageState extends State<CartPage> {
                           ),
                         ),
                       ),
+                    ),
+                  ),
+                ),
+                // Отображение общей стоимости
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Text(
+                    '${widget.localizations.get('delivery_cost')}$totalCost ₽',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.greenAccent,
                     ),
                   ),
                 ),
@@ -681,7 +833,10 @@ class CartItemCard extends StatelessWidget {
   final VoidCallback onRemove;
   final AppLocalizations localizations;
 
-  CartItemCard({required this.category, required this.onRemove, required this.localizations});
+  CartItemCard(
+      {required this.category,
+      required this.onRemove,
+      required this.localizations});
 
   @override
   Widget build(BuildContext context) {
@@ -846,19 +1001,14 @@ class HowWeWorkPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Фоновое изображение
+        // Фоновый градиент
         Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/logistic2.jpg'),
-              fit: BoxFit.cover,
+            gradient: LinearGradient(
+              colors: [Colors.blueGrey.shade900, Colors.blueGrey.shade700],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-          ),
-        ),
-        // Темный слой поверх изображения для улучшения читаемости текста
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
           ),
         ),
         // Контент страницы "Как мы работаем"
@@ -894,7 +1044,9 @@ class HowWeWorkPage extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: steps.length,
                     itemBuilder: (context, index) {
-                      return HowWeWorkCard(step: steps[index], localizations: localizations);
+                      return HowWeWorkCard(
+                          step: steps[index],
+                          localizations: localizations);
                     },
                   ),
                 ],
@@ -1007,19 +1159,14 @@ class AdvantagesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Фоновое изображение
+        // Фоновый градиент
         Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/logistic.jpg'),
-              fit: BoxFit.cover,
+            gradient: LinearGradient(
+              colors: [Colors.teal.shade900, Colors.teal.shade700],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-          ),
-        ),
-        // Темный слой поверх изображения для улучшения читаемости текста
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
           ),
         ),
         // Контент страницы "Преимущества"
@@ -1055,7 +1202,9 @@ class AdvantagesPage extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: advantages.length,
                     itemBuilder: (context, index) {
-                      return AdvantagesCard(item: advantages[index], localizations: localizations);
+                      return AdvantagesCard(
+                          item: advantages[index],
+                          localizations: localizations);
                     },
                   ),
                 ],
@@ -1133,19 +1282,14 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Фоновое изображение
+        // Фоновый градиент
         Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/about.jpg'),
-              fit: BoxFit.cover,
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple.shade900, Colors.deepPurple.shade700],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-          ),
-        ),
-        // Темный слой поверх изображения для улучшения читаемости текста
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
           ),
         ),
         // Контент страницы "О компании"
@@ -1168,7 +1312,7 @@ class AboutUsPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 8),
-                  // Минимальное описание страницы
+                  // Описание страницы
                   Text(
                     localizations.get('about_company'),
                     textAlign: TextAlign.center,
@@ -1226,7 +1370,7 @@ class AboutUsPage extends StatelessWidget {
   }
 }
 
-/// Виджет строки контакта с иконкой и текстом.
+/// Виджет строки контакта עם אייקון וטקסט.
 class ContactRow extends StatelessWidget {
   final IconData icon;
   final Color color;
@@ -1241,7 +1385,8 @@ class ContactRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center, // Центрируем содержимое строки
+      mainAxisAlignment:
+          MainAxisAlignment.center, // Центрируем содержимое строки
       children: [
         FaIcon(
           icon,
@@ -1256,7 +1401,8 @@ class ContactRow extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               color: Colors.white,
-              fontWeight: FontWeight.bold, // Увеличиваем жирность шрифта
+              fontWeight:
+                  FontWeight.bold, // Увеличиваем жирность шрифта
             ),
           ),
         ),
@@ -1274,27 +1420,27 @@ class PricesPage extends StatelessWidget {
   final List<PriceItem> priceItems = [
     PriceItem(
       category: 'price_delivery_documents',
-      price: 'от 3000 ₽',
+      price: '3000 ₽',
     ),
     PriceItem(
       category: 'price_religious_items',
-      price: 'от 2500 ₽',
+      price: '2500 ₽',
     ),
     PriceItem(
       category: 'price_clothing',
-      price: 'от 2300 ₽',
+      price: '2300 ₽',
     ),
     PriceItem(
       category: 'price_kosher_food',
-      price: 'от 2600 ₽',
+      price: '2600 ₽',
     ),
     PriceItem(
       category: 'price_duty_free',
-      price: 'от 3000 ₽',
+      price: '3000 ₽',
     ),
     PriceItem(
       category: 'price_small_packages',
-      price: 'от 3000 ₽',
+      price: '3000 ₽',
     ),
   ];
 
@@ -1302,25 +1448,13 @@ class PricesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Фоновое изображение
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/playns.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        // Серый градиент поверх изображения с уменьшенной непрозрачностью
+        // Фоновый градиент
         Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Colors.black.withOpacity(0.3),
-                Colors.black.withOpacity(0.3),
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+              colors: [Colors.indigo.shade900, Colors.indigo.shade700],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
           ),
         ),
@@ -1442,32 +1576,38 @@ class ProductsPage extends StatelessWidget {
   final List<CargoCategory> categories = [
     CargoCategory(
       name: 'price_delivery_documents',
-      price: 'от 3000 ₽',
+      price: '3000 ₽',
+      deliveryCost: 3000,
       icon: Icons.document_scanner,
     ),
     CargoCategory(
       name: 'price_religious_items',
-      price: 'от 2500 ₽',
+      price: '2500 ₽',
+      deliveryCost: 2500,
       icon: Icons.account_balance,
     ),
     CargoCategory(
       name: 'price_clothing',
-      price: 'от 2300 ₽',
+      price: '2300 ₽',
+      deliveryCost: 2300,
       icon: Icons.shopping_bag,
     ),
     CargoCategory(
       name: 'price_kosher_food',
-      price: 'от 2600 ₽',
+      price: '2600 ₽',
+      deliveryCost: 2600,
       icon: Icons.restaurant,
     ),
     CargoCategory(
       name: 'price_duty_free',
-      price: 'от 3000 ₽',
+      price: '3000 ₽',
+      deliveryCost: 3000,
       icon: Icons.local_offer,
     ),
     CargoCategory(
       name: 'price_small_packages',
-      price: 'от 3000 ₽',
+      price: '3000 ₽',
+      deliveryCost: 3000,
       icon: Icons.local_shipping,
     ),
   ];
@@ -1476,18 +1616,15 @@ class ProductsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Фоновое изображение
+        // Фоновый градиент
         Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/tovari.jpg'),
-              fit: BoxFit.cover,
+            gradient: LinearGradient(
+              colors: [Colors.brown.shade900, Colors.brown.shade700],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
           ),
-        ),
-        // Затемнённый слой для улучшения читаемости текста
-        Container(
-          color: Colors.black.withOpacity(0.6),
         ),
         // Контент страницы "Товары"
         SafeArea(
@@ -1524,7 +1661,8 @@ class ProductsPage extends StatelessWidget {
                       final GlobalKey iconKey = GlobalKey();
                       return CargoCard(
                         category: categories[index],
-                        onAddToCart: () => onAddToCart(categories[index], iconKey),
+                        onAddToCart: () =>
+                            onAddToCart(categories[index], iconKey),
                         key: iconKey,
                         localizations: localizations,
                       );
@@ -1544,11 +1682,13 @@ class ProductsPage extends StatelessWidget {
 class CargoCategory {
   final String name; // key for localization
   final String price;
+  final int deliveryCost; // numerical cost for calculation
   final IconData icon;
 
   CargoCategory({
     required this.name,
     required this.price,
+    required this.deliveryCost,
     required this.icon,
   });
 }
@@ -1570,13 +1710,15 @@ class CargoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.grey[800],
-      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
+      margin:
+          EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        contentPadding:
+            EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         leading: Icon(
           category.icon,
           color: Colors.white,
@@ -1586,7 +1728,8 @@ class CargoCard extends StatelessWidget {
           localizations.get(category.name),
           style: TextStyle(
             fontSize: 18,
-            fontWeight: FontWeight.bold, // Увеличиваем жирность шрифта
+            fontWeight:
+                FontWeight.bold, // Увеличиваем жирность шрифта
             color: Colors.white,
           ),
         ),
@@ -1629,25 +1772,21 @@ class SettingsPage extends StatelessWidget {
     String currentLocale = localizations.locale;
     return Stack(
       children: [
-        // Фоновое изображение
+        // Фоновый градиент
         Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/settings.jpg'),
-              fit: BoxFit.cover,
+            gradient: LinearGradient(
+              colors: [Colors.black87, Colors.grey.shade800],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-          ),
-        ),
-        // Темный слой поверх изображения для улучшения читаемости текста
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
           ),
         ),
         // Контент страницы "Настройки"
         SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
             child: Column(
               children: [
                 // Заголовок страницы
@@ -1698,10 +1837,13 @@ class AnimatedLanguageSelector extends StatefulWidget {
   });
 
   @override
-  _AnimatedLanguageSelectorState createState() => _AnimatedLanguageSelectorState();
+  _AnimatedLanguageSelectorState createState() =>
+      _AnimatedLanguageSelectorState();
 }
 
-class _AnimatedLanguageSelectorState extends State<AnimatedLanguageSelector> with SingleTickerProviderStateMixin {
+class _AnimatedLanguageSelectorState
+    extends State<AnimatedLanguageSelector>
+    with SingleTickerProviderStateMixin {
   late String _selectedLocale;
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -1715,7 +1857,8 @@ class _AnimatedLanguageSelectorState extends State<AnimatedLanguageSelector> wit
       duration: Duration(milliseconds: 300),
       vsync: this,
     );
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    _animation =
+        CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
   }
 
   void _toggleDropdown() {
@@ -1745,24 +1888,29 @@ class _AnimatedLanguageSelectorState extends State<AnimatedLanguageSelector> wit
         GestureDetector(
           onTap: _toggleDropdown,
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+            padding:
+                EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
             decoration: BoxDecoration(
               color: Colors.grey[800],
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   _getLanguageName(_selectedLocale),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontWeight:
+                        FontWeight.bold,
                   ),
                 ),
                 Icon(
-                  _isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                  _isExpanded
+                      ? Icons.arrow_drop_up
+                      : Icons.arrow_drop_down,
                   color: Colors.white,
                 ),
               ],
@@ -1781,9 +1929,12 @@ class _AnimatedLanguageSelectorState extends State<AnimatedLanguageSelector> wit
             ),
             child: Column(
               children: [
-                languageOption('ru', widget.localizations.get('language_ru')),
-                languageOption('en', widget.localizations.get('language_en')),
-                languageOption('he', widget.localizations.get('language_he')),
+                languageOption(
+                    'ru', widget.localizations.get('language_ru')),
+                languageOption(
+                    'en', widget.localizations.get('language_en')),
+                languageOption(
+                    'he', widget.localizations.get('language_he')),
               ],
             ),
           ),
@@ -1797,13 +1948,17 @@ class _AnimatedLanguageSelectorState extends State<AnimatedLanguageSelector> wit
       onTap: () => _selectLocale(locale),
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
+        padding:
+            EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
         child: Text(
           languageName,
           style: TextStyle(
-            color: _selectedLocale == locale ? Colors.blueAccent : Colors.white,
+            color: _selectedLocale == locale
+                ? Colors.blueAccent
+                : Colors.white,
             fontSize: 16,
-            fontWeight: FontWeight.bold,
+            fontWeight:
+                FontWeight.bold,
           ),
         ),
       ),
@@ -1830,23 +1985,331 @@ class _AnimatedLanguageSelectorState extends State<AnimatedLanguageSelector> wit
   }
 }
 
-/// Виджет для отображения пустых страниц.
-class PlaceholderPage extends StatelessWidget {
-  final String title;
+/// Страница "Рассчитать доставку".
+class CalculateDeliveryPage extends StatefulWidget {
+  final AppLocalizations localizations;
 
-  PlaceholderPage({required this.title});
+  CalculateDeliveryPage({required this.localizations});
+
+  @override
+  _CalculateDeliveryPageState createState() => _CalculateDeliveryPageState();
+}
+
+class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
+  final _formKey = GlobalKey<FormState>();
+  String? _originCity;
+  String? _destinationCity;
+  int? _deliveryCost;
+  List<CargoCategory> _selectedProducts = [];
+
+  // Определяем внутренние коды городов
+  final List<String> _cities = ['moscow', 'tel_aviv'];
+
+  // Определяем стоимости доставки между городами
+  final Map<String, Map<String, int>> _deliveryCosts = {
+    'moscow': {'tel_aviv': 5000},
+    'tel_aviv': {'moscow': 5500},
+  };
+
+  // Определяем список доступных товаров
+  final List<CargoCategory> _availableProducts = [
+    CargoCategory(
+      name: 'price_delivery_documents',
+      price: '3000 ₽',
+      deliveryCost: 3000,
+      icon: Icons.document_scanner,
+    ),
+    CargoCategory(
+      name: 'price_religious_items',
+      price: '2500 ₽',
+      deliveryCost: 2500,
+      icon: Icons.account_balance,
+    ),
+    CargoCategory(
+      name: 'price_clothing',
+      price: '2300 ₽',
+      deliveryCost: 2300,
+      icon: Icons.shopping_bag,
+    ),
+    CargoCategory(
+      name: 'price_kosher_food',
+      price: '2600 ₽',
+      deliveryCost: 2600,
+      icon: Icons.restaurant,
+    ),
+    CargoCategory(
+      name: 'price_duty_free',
+      price: '3000 ₽',
+      deliveryCost: 3000,
+      icon: Icons.local_offer,
+    ),
+    CargoCategory(
+      name: 'price_small_packages',
+      price: '3000 ₽',
+      deliveryCost: 3000,
+      icon: Icons.local_shipping,
+    ),
+  ];
+
+  void _calculateDelivery() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      if (_originCity == _destinationCity) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(
+                  'Города отправления и назначения одинаковы.')),
+        );
+        setState(() {
+          _deliveryCost = null;
+        });
+        return;
+      }
+
+      if (_originCity != null &&
+          _destinationCity != null &&
+          _deliveryCosts.containsKey(_originCity!) &&
+          _deliveryCosts[_originCity!]!.containsKey(_destinationCity!)) {
+        int baseCost =
+            _deliveryCosts[_originCity!]![_destinationCity!] ?? 0;
+        int productsCost = 0;
+        for (var product in _selectedProducts) {
+          productsCost += product.deliveryCost;
+        }
+        setState(() {
+          _deliveryCost = baseCost + productsCost;
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Стоимость доставки не определена.')),
+        );
+        setState(() {
+          _deliveryCost = null;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        '$title\n\nЗдесь будет содержимое страницы.',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 24,
-          color: Colors.white70,
+    return Stack(
+      children: [
+        // Фоновый градиент
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.orange.shade400,
+                Colors.deepOrangeAccent.shade700,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
         ),
-      ),
+        // Контент страницы "Рассчитать доставку"
+        SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    // Заголовок страницы
+                    Text(
+                      widget.localizations.get('calculate_delivery'),
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 24),
+                    // Иконка перед выбором города отправления
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.departure_board,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        SizedBox(width: 16),
+                        Expanded(
+                          child: DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              labelText:
+                                  widget.localizations.get('origin_city'),
+                              labelStyle: TextStyle(color: Colors.white),
+                              filled: true,
+                              fillColor: Colors.grey[800],
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            value: _originCity,
+                            items: _cities.map((String city) {
+                              return DropdownMenuItem<String>(
+                                value: city,
+                                child: Text(
+                                  widget.localizations.get(city),
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _originCity = newValue;
+                              });
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return widget.localizations.get(
+                                    'select_origin_city');
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 24),
+                    // Иконка перед выбором города назначения
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.flight_land, // Заменили на валидную иконку
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        SizedBox(width: 16),
+                        Expanded(
+                          child: DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              labelText:
+                                  widget.localizations.get('destination_city'),
+                              labelStyle: TextStyle(color: Colors.white),
+                              filled: true,
+                              fillColor: Colors.grey[800],
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            value: _destinationCity,
+                            items: _cities.map((String city) {
+                              return DropdownMenuItem<String>(
+                                value: city,
+                                child: Text(
+                                  widget.localizations.get(city),
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _destinationCity = newValue;
+                              });
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return widget.localizations.get(
+                                    'select_destination_city');
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 24),
+                    // Выбор товаров
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        widget.localizations.get('products'),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    // Список товаров с чекбоксами
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[800],
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        children: _availableProducts.map((product) {
+                          return CheckboxListTile(
+                            title: Text(
+                              widget.localizations.get(product.name),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            subtitle: Text(
+                              product.price,
+                              style: TextStyle(color: Colors.white70),
+                            ),
+                            value: _selectedProducts.contains(product),
+                            onChanged: (bool? value) {
+                              setState(() {
+                                if (value == true) {
+                                  _selectedProducts.add(product);
+                                } else {
+                                  _selectedProducts.remove(product);
+                                }
+                              });
+                            },
+                            activeColor: Colors.blueAccent,
+                            checkColor: Colors.white,
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    SizedBox(height: 24),
+                    // Кнопка рассчитать
+                    ElevatedButton(
+                      onPressed: _calculateDelivery,
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 32.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        backgroundColor: Colors.blueAccent, // Заменили primary на backgroundColor
+                      ),
+                      child: Text(
+                        widget.localizations.get('calculate'),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 24),
+                    // Отображение стоимости доставки
+                    _deliveryCost != null
+                        ? Text(
+                            '${widget.localizations.get('delivery_cost')}${_deliveryCost!} ₽',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.greenAccent,
+                            ),
+                          )
+                        : SizedBox(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

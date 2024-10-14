@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # IsraelDelCargoApp
 
 A new Flutter project.
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# IsraelDelCargoNew tools, optimization, tracking, inventory, analytics, collaboration, innovation.
+>>>>>>> 2598ce4bf4d7d2b7fcaa77c5bcb616456f095a91
