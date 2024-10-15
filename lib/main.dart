@@ -55,7 +55,7 @@ class AppLocalizations {
       'advantages_title1': 'Низкая цена',
       'advantages_desc1': 'Цены на перевозки ниже рыночных.',
       'advantages_title2': 'Защита и безопасность',
-      'advantages_desc2': 'Гарантируем безопасность и сохранность посылок!',
+      'advantages_desc2': 'Мы гарантируем безопасность и сохранность посылок!',
       'advantages_title3': 'Быстрая работа менеджеров',
       'advantages_desc3': 'У наших менеджеров можно уточнить все детали.',
       'advantages_title4': 'Высокая скорость доставки',
@@ -77,18 +77,25 @@ class AppLocalizations {
       'advantages_description':
           'Наши преимущества делают нас лучшим выбором для доставки ваших грузов. Мы предлагаем низкие цены, высокую безопасность, быстрых и опытных менеджеров, а также непревзойденную скорость доставки.',
       'delete_confirmation_title': 'Подтверждение удаления',
-      'delete_confirmation_content': 'Вы уверены, что хотите удалить этот товар из корзины?',
+      'delete_confirmation_content':
+          'Вы уверены, что хотите удалить этот товар из корзины?',
       'yes': 'Да',
       'no': 'Нет',
       'calculate_delivery': 'Рассчитать доставку',
-      'origin_city': 'Город отправления',
-      'destination_city': 'Город назначения',
-      'select_origin_city': 'Выберите город отправления',
-      'select_destination_city': 'Выберите город назначения',
+      'origin_country': 'Страна отправления',
+      'destination_country': 'Страна назначения',
+      'select_origin_country': 'Выберите страну отправления',
+      'select_destination_country': 'Выберите страну назначения',
       'calculate': 'Рассчитать',
       'delivery_cost': 'Стоимость доставки: ',
-      'moscow': 'Москва',
-      'tel_aviv': 'Тель-Авив',
+      'russia': 'Россия',
+      'israel': 'Израиль',
+      'georgia': 'Грузия',
+      'azerbaijan': "Азербайджан", // Используем двойные кавычки
+      'kazakhstan': 'Казахстан',
+      'delivery_info':
+          'Доставка стоит 5000 руб. Эта сумма добавляется к каждому заказу.',
+      'leave_request': 'Оставить заявку',
     },
     'en': {
       'menu': 'Menu',
@@ -152,18 +159,25 @@ class AppLocalizations {
       'advantages_description':
           'Our advantages make us the best choice for delivering your cargo. We offer low prices, high security, fast and experienced managers, and unparalleled delivery speed.',
       'delete_confirmation_title': 'Delete Confirmation',
-      'delete_confirmation_content': 'Are you sure you want to remove this item from the cart?',
+      'delete_confirmation_content':
+          'Are you sure you want to remove this item from the cart?',
       'yes': 'Yes',
       'no': 'No',
       'calculate_delivery': 'Calculate Delivery',
-      'origin_city': 'Origin City',
-      'destination_city': 'Destination City',
-      'select_origin_city': 'Select Origin City',
-      'select_destination_city': 'Select Destination City',
+      'origin_country': 'Origin Country',
+      'destination_country': 'Destination Country',
+      'select_origin_country': 'Select Origin Country',
+      'select_destination_country': 'Select Destination Country',
       'calculate': 'Calculate',
       'delivery_cost': 'Delivery Cost: ',
-      'moscow': 'Moscow',
-      'tel_aviv': 'Tel Aviv',
+      'russia': 'Russia',
+      'israel': 'Israel',
+      'georgia': 'Georgia',
+      'azerbaijan': 'Azerbaijan',
+      'kazakhstan': 'Kazakhstan',
+      'delivery_info':
+          'Delivery costs 5000 RUB. This amount is added to each order.',
+      'leave_request': 'Leave a Request',
     },
     'he': {
       'menu': 'תפריט',
@@ -209,8 +223,7 @@ class AppLocalizations {
       'advantages_title3': 'מנהלים מהירים',
       'advantages_desc3': 'ניתן לברר את כל הפרטים עם המנהלים שלנו.',
       'advantages_title4': 'מהירות משלוח גבוהה',
-      'advantages_desc4':
-          'אנו מחויבים לספק את החבילה שלך בהקדם האפשרי.',
+      'advantages_desc4': 'אנו מחויבים לספק את החבילה שלך בהקדם האפשרי.',
       'prices_title': 'מחירים',
       'price_delivery_documents': 'משלוח מסמכים',
       'price_religious_items': 'פריטים דתיים (ספרים, יודאיקה)',
@@ -227,18 +240,25 @@ class AppLocalizations {
       'advantages_description':
           'היתרונות שלנו עושים אותנו לבחירה הטובה ביותר עבור משלוח המטענים שלך. אנו מציעים מחירים נמוכים, ביטחון גבוה, מנהלים מהירים ומנוסים, ומהירות משלוח שאין לה תחרות.',
       'delete_confirmation_title': 'אישור מחיקה',
-      'delete_confirmation_content': 'האם אתה בטוח שברצונך להסיר את המוצר הזה מהעגלה?',
+      'delete_confirmation_content':
+          'האם אתה בטוח שברצונך להסיר את המוצר הזה מהעגלה?',
       'yes': 'כן',
       'no': 'לא',
       'calculate_delivery': 'חשב את המשלוח',
-      'origin_city': 'עיר המוצא',
-      'destination_city': 'עיר היעד',
-      'select_origin_city': 'בחר עיר מוצא',
-      'select_destination_city': 'בחר עיר יעד',
+      'origin_country': 'עיר המוצא',
+      'destination_country': 'עיר היעד',
+      'select_origin_country': 'בחר עיר מוצא',
+      'select_destination_country': 'בחר עיר יעד',
       'calculate': 'חשב',
       'delivery_cost': 'עלות משלוח: ',
-      'moscow': 'מוסקבה',
-      'tel_aviv': 'תל אביב',
+      'russia': 'רוסיה',
+      'israel': 'ישראל',
+      'georgia': 'גאורגיה',
+      'azerbaijan': "אזרבייג'ן", // Используем двойные кавычки
+      'kazakhstan': 'קזחסטן',
+      'delivery_info':
+          'המשלוח עולה 5000 רובל. סכום זה נוסף לכל הזמנה.',
+      'leave_request': 'השאר בקשה',
     },
   };
 
@@ -327,8 +347,7 @@ class _HomePageState extends State<HomePage> {
         );
         break;
       case DrawerSections.calculateDelivery:
-        container =
-            CalculateDeliveryPage(localizations: widget.localizations);
+        container = CalculateDeliveryPage(localizations: widget.localizations);
         break;
       default:
         container = ProductsPage(
@@ -672,11 +691,35 @@ class CartPage extends StatefulWidget {
 
 /// Состояние для CartPage.
 class _CartPageState extends State<CartPage> {
+  /// Фиксированная стоимость доставки
+  final int deliveryCost = 5000;
+
   /// Функция для открытия ссылки оплаты.
   void _launchPaymentURL() async {
     final Uri url =
         Uri.parse('https://www.tbank.ru/rm/rabaev.natan1/qBQMJ15331/');
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(widget.localizations.get('not_supported'))),
+      );
+    }
+  }
+
+  /// Функция для отправки заявки в WhatsApp.
+  void _sendRequestViaWhatsApp() async {
+    String message = '📦 *IsraelDelCargo Заявка*\n\n';
+    message += '*Товары:*\n';
+    for (var item in widget.cartItems) {
+      message += '- ${widget.localizations.get(item.name)}: ${item.price}\n';
+    }
+    message += '\n*Стоимость доставки:* ${deliveryCost}₽\n';
+    message += '\n*Общая стоимость:* ${totalCost}₽';
+
+    final Uri whatsappUri = Uri.parse(
+        "https://wa.me/79914992420?text=${Uri.encodeComponent(message)}");
+    if (await canLaunchUrl(whatsappUri)) {
+      await launchUrl(whatsappUri, mode: LaunchMode.externalApplication);
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(widget.localizations.get('not_supported'))),
       );
@@ -729,7 +772,7 @@ class _CartPageState extends State<CartPage> {
 
   /// Рассчитать общую стоимость корзины
   int get totalCost {
-    int sum = 0;
+    int sum = deliveryCost; // Добавляем фиксированную стоимость доставки
     for (var item in widget.cartItems) {
       sum += item.deliveryCost;
     }
@@ -751,77 +794,159 @@ class _CartPageState extends State<CartPage> {
                 style: TextStyle(fontSize: 24, color: Colors.white70),
               ),
             )
-          : Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: widget.cartItems.length,
-                    itemBuilder: (context, index) {
-                      return CartItemCard(
-                        category: widget.cartItems[index],
-                        onRemove: () => _confirmDelete(index),
-                        localizations: widget.localizations,
-                      );
-                    },
-                  ),
+          : Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.purple.shade900, Colors.purple.shade700],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
-                    onPressed: _launchPaymentURL,
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 16.0, horizontal: 32.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      backgroundColor:
-                          Colors.transparent, // Заменили primary на backgroundColor
-                      shadowColor: Colors.transparent, // Убираем тень
-                    ).copyWith(
-                      elevation: ButtonStyleButton.allOrNull(0.0),
-                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                        (states) => Colors.transparent,
-                      ),
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: widget.cartItems.length,
+                      itemBuilder: (context, index) {
+                        return CartItemCard(
+                          category: widget.cartItems[index],
+                          onRemove: () => _confirmDelete(index),
+                          localizations: widget.localizations,
+                        );
+                      },
                     ),
-                    child: Ink(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Colors.blueAccent, Colors.purpleAccent],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      child: Container(
-                        constraints:
-                            BoxConstraints(minWidth: 150, minHeight: 50),
-                        alignment: Alignment.center,
-                        child: Text(
-                          widget.localizations.get('pay'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        // Информация о доставке
+                        Text(
+                          widget.localizations.get('delivery_info'),
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
+                            color: Colors.yellowAccent,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 8),
+                        // Отображение общей стоимости
+                        Text(
+                          '${widget.localizations.get('delivery_cost')}$totalCost ₽',
+                          style: TextStyle(
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.greenAccent,
                           ),
                         ),
-                      ),
+                        SizedBox(height: 16),
+                        // Кнопка "Оставить заявку"
+                        ElevatedButton(
+                          onPressed: widget.cartItems.isEmpty
+                              ? null
+                              : () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text(
+                                            widget.localizations
+                                                .get('leave_request')),
+                                        content: Text(
+                                            'Вы уверены, что хотите оставить заявку с текущим содержимым корзины?'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text(
+                                                widget.localizations.get('no')),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              _sendRequestViaWhatsApp();
+                                            },
+                                            child: Text(
+                                                widget.localizations.get('yes')),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 32.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            backgroundColor:
+                                Colors.orangeAccent, // Цвет кнопки
+                          ),
+                          child: Text(
+                            widget.localizations.get('leave_request'),
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        // Кнопка оплатить
+                        ElevatedButton(
+                          onPressed: widget.cartItems.isEmpty
+                              ? null
+                              : _launchPaymentURL,
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 32.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            backgroundColor:
+                                Colors.transparent, // Заменили primary на backgroundColor
+                            shadowColor: Colors.transparent, // Убираем тень
+                          ).copyWith(
+                            elevation: ButtonStyleButton.allOrNull(0.0),
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith<Color>(
+                              (states) => Colors.transparent,
+                            ),
+                          ),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.blueAccent,
+                                  Colors.purpleAccent
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            child: Container(
+                              constraints:
+                                  BoxConstraints(minWidth: 150, minHeight: 50),
+                              alignment: Alignment.center,
+                              child: Text(
+                                widget.localizations.get('pay'),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                // Отображение общей стоимости
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
-                  child: Text(
-                    '${widget.localizations.get('delivery_cost')}$totalCost ₽',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.greenAccent,
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
     );
   }
@@ -1286,7 +1411,10 @@ class AboutUsPage extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.deepPurple.shade900, Colors.deepPurple.shade700],
+              colors: [
+                Colors.deepPurple.shade900,
+                Colors.deepPurple.shade700
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -1997,19 +2125,21 @@ class CalculateDeliveryPage extends StatefulWidget {
 
 class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
   final _formKey = GlobalKey<FormState>();
-  String? _originCity;
-  String? _destinationCity;
+  String? _originCountry;
+  String? _destinationCountry;
   int? _deliveryCost;
-  List<CargoCategory> _selectedProducts = [];
 
-  // Определяем внутренние коды городов
-  final List<String> _cities = ['moscow', 'tel_aviv'];
+  // Определяем список стран
+  final List<String> _countries = [
+    'russia',
+    'israel',
+    'georgia',
+    'azerbaijan',
+    'kazakhstan'
+  ];
 
-  // Определяем стоимости доставки между городами
-  final Map<String, Map<String, int>> _deliveryCosts = {
-    'moscow': {'tel_aviv': 5000},
-    'tel_aviv': {'moscow': 5500},
-  };
+  // Фиксированная стоимость доставки
+  final int fixedDeliveryCost = 5000;
 
   // Определяем список доступных товаров
   final List<CargoCategory> _availableProducts = [
@@ -2051,15 +2181,17 @@ class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
     ),
   ];
 
+  List<CargoCategory> _selectedProducts = [];
+
   void _calculateDelivery() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      if (_originCity == _destinationCity) {
+      if (_originCountry == _destinationCountry) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text(
-                  'Города отправления и назначения одинаковы.')),
+                  'Страны отправления и назначения одинаковы.')),
         );
         setState(() {
           _deliveryCost = null;
@@ -2067,27 +2199,15 @@ class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
         return;
       }
 
-      if (_originCity != null &&
-          _destinationCity != null &&
-          _deliveryCosts.containsKey(_originCity!) &&
-          _deliveryCosts[_originCity!]!.containsKey(_destinationCity!)) {
-        int baseCost =
-            _deliveryCosts[_originCity!]![_destinationCity!] ?? 0;
-        int productsCost = 0;
-        for (var product in _selectedProducts) {
-          productsCost += product.deliveryCost;
-        }
-        setState(() {
-          _deliveryCost = baseCost + productsCost;
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Стоимость доставки не определена.')),
-        );
-        setState(() {
-          _deliveryCost = null;
-        });
+      // Рассчитываем общую стоимость доставки: фиксированная + сумма выбранных товаров
+      int sum = fixedDeliveryCost;
+      for (var item in _selectedProducts) {
+        sum += item.deliveryCost;
       }
+
+      setState(() {
+        _deliveryCost = sum;
+      });
     }
   }
 
@@ -2128,11 +2248,11 @@ class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
                       ),
                     ),
                     SizedBox(height: 24),
-                    // Иконка перед выбором города отправления
+                    // Иконка перед выбором страны отправления
                     Row(
                       children: [
                         Icon(
-                          Icons.departure_board,
+                          Icons.flag, // Измененная иконка для страны
                           color: Colors.white,
                           size: 30,
                         ),
@@ -2141,7 +2261,7 @@ class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
                           child: DropdownButtonFormField<String>(
                             decoration: InputDecoration(
                               labelText:
-                                  widget.localizations.get('origin_city'),
+                                  widget.localizations.get('origin_country'),
                               labelStyle: TextStyle(color: Colors.white),
                               filled: true,
                               fillColor: Colors.grey[800],
@@ -2149,25 +2269,25 @@ class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
-                            value: _originCity,
-                            items: _cities.map((String city) {
+                            value: _originCountry,
+                            items: _countries.map((String country) {
                               return DropdownMenuItem<String>(
-                                value: city,
+                                value: country,
                                 child: Text(
-                                  widget.localizations.get(city),
+                                  widget.localizations.get(country),
                                   style: TextStyle(color: Colors.white),
                                 ),
                               );
                             }).toList(),
                             onChanged: (String? newValue) {
                               setState(() {
-                                _originCity = newValue;
+                                _originCountry = newValue;
                               });
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return widget.localizations.get(
-                                    'select_origin_city');
+                                    'select_origin_country');
                               }
                               return null;
                             },
@@ -2176,11 +2296,11 @@ class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
                       ],
                     ),
                     SizedBox(height: 24),
-                    // Иконка перед выбором города назначения
+                    // Иконка перед выбором страны назначения
                     Row(
                       children: [
                         Icon(
-                          Icons.flight_land, // Заменили на валидную иконку
+                          Icons.flag_outlined, // Измененная иконка для страны
                           color: Colors.white,
                           size: 30,
                         ),
@@ -2189,7 +2309,7 @@ class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
                           child: DropdownButtonFormField<String>(
                             decoration: InputDecoration(
                               labelText:
-                                  widget.localizations.get('destination_city'),
+                                  widget.localizations.get('destination_country'),
                               labelStyle: TextStyle(color: Colors.white),
                               filled: true,
                               fillColor: Colors.grey[800],
@@ -2197,25 +2317,25 @@ class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
-                            value: _destinationCity,
-                            items: _cities.map((String city) {
+                            value: _destinationCountry,
+                            items: _countries.map((String country) {
                               return DropdownMenuItem<String>(
-                                value: city,
+                                value: country,
                                 child: Text(
-                                  widget.localizations.get(city),
+                                  widget.localizations.get(country),
                                   style: TextStyle(color: Colors.white),
                                 ),
                               );
                             }).toList(),
                             onChanged: (String? newValue) {
                               setState(() {
-                                _destinationCity = newValue;
+                                _destinationCountry = newValue;
                               });
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return widget.localizations.get(
-                                    'select_destination_city');
+                                    'select_destination_country');
                               }
                               return null;
                             },
@@ -2280,7 +2400,7 @@ class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
-                        backgroundColor: Colors.blueAccent, // Заменили primary на backgroundColor
+                        backgroundColor: Colors.blueAccent, // Цвет кнопки
                       ),
                       child: Text(
                         widget.localizations.get('calculate'),
@@ -2290,6 +2410,16 @@ class _CalculateDeliveryPageState extends State<CalculateDeliveryPage> {
                           color: Colors.white,
                         ),
                       ),
+                    ),
+                    SizedBox(height: 24),
+                    // Информация о доставке
+                    Text(
+                      widget.localizations.get('delivery_info'),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.yellowAccent,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 24),
                     // Отображение стоимости доставки
